@@ -19,13 +19,13 @@ const AppSidebar = () => {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
-              <span>Videos</span>
+              <span>Products</span>
             </SidebarMenuButton>
 
             <SidebarMenuSub>
               <SidebarMenuSubItem>
                 <SidebarMenuSubButton asChild>
-                  <a href="#">All Videos</a>
+                  <a href="#">All Products</a>
                 </SidebarMenuSubButton>
               </SidebarMenuSubItem>
             </SidebarMenuSub>

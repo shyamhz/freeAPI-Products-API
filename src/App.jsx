@@ -9,7 +9,7 @@ const App = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-    const url = "https://api.freeapi.app/api/v1/public/youtube/videos";
+    const url = "https://api.freeapi.app/api/v1/public/randomproducts";
     const method = "GET";
     const headers = {
       accept: "application/json",
@@ -31,12 +31,13 @@ const App = () => {
         const items = [];
         resJson["data"]["data"].map((item) => {
           items.push({
-            id: item["items"]["id"],
-            imageUrl: item["items"]["snippet"]["thumbnails"]["standard"]["url"],
-            videoTitle: item["items"]["snippet"]["title"],
-            channelTitle: item["items"]["snippet"]["channelTitle"],
-            likeCount: item["items"]["statistics"]["likeCount"],
-            viewCount: item["items"]["statistics"]["viewCount"],
+            id: item["id"],
+            title: item["title"],
+            description: item["description"],
+            price: item["price"],
+            discountPercentage: item["discountPercentage"],
+            stock: item["stock"],
+            thumbnail: item["thumbnail"],
           });
         });
         setCardObjectList(items);
@@ -44,7 +45,7 @@ const App = () => {
         if (error === "AbortError") {
           // Request aborted
         } else {
-          console.error("Error fetching videos:", error.message);
+          console.error("Error fetching products:", error.message);
           // setState(error);
         }
       }
@@ -58,10 +59,10 @@ const App = () => {
 
   return (
     <Sidebar>
-      <AppHeader title="ChaiTube" />
+      <AppHeader title="ChaiMart" />
       <AppBody
         CardObjectList={cardObjectList}
-        className="flex flex-col gap-10 sm:text-xs sm:justify-evenly p-4 sm:flex-row sm:flex-wrap sm:mx-auto"
+        className="flex flex-col gap-10 sm:text-xs justify-center sm:justify-evenly p-4 sm:flex-row sm:flex-wrap sm:mx-auto"
       />
     </Sidebar>
   );

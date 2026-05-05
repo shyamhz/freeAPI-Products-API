@@ -41,6 +41,20 @@ const AppHeader = ({ title }) => {
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-none tracking-tight truncate">
           {title}
         </h1>
+        <div>
+          <p className="text-sm">
+            Powered by{" "}
+            <a href="https://freeapi.app">
+              <strong> FreeAPI.app</strong>
+            </a>
+          </p>
+          <p className="text-muted-foreground text-xs">
+            Favicon by{" "}
+            <a target="_blank" href="https://icons8.com/icon/64748/tea-bag">
+              <strong>Icons8</strong>
+            </a>
+          </p>
+        </div>
       </div>
       <Button
         onClick={toggleDarkMode}

@@ -1,124 +1,81 @@
-# ChaiTube - YouTube-Style Video Listing Interface
+# Product Listing
 
-A modern, responsive YouTube-style video listing application built with React and Tailwind CSS that fetches and displays video data from the FreeAPI.
+A modern, responsive product listing application built with React and Vite. Fetches and displays random products from the [FreeAPI](https://freeapi.app) with a clean, intuitive UI.
 
-## 📋 Overview
+## Features
 
-ChaiTube is a clean, minimalist video browsing interface that demonstrates best practices in component design, hook usage, and API integration. The application fetches video data from the FreeAPI and displays it in an organized card-based layout with video thumbnails, titles, view counts, and like counts.
+- **Random Product Loading**: Fetches random products from FreeAPI endpoint
+- **Responsive Design**: Mobile-first layout with Tailwind CSS
+- **Component-Based Architecture**: Reusable UI components using shadcn/ui
+- **Sidebar Navigation**: Organized navigation interface
+- **Error Handling**: Implements request cancellation and proper error management
+- **Product Information**: Displays price, discount, stock, and descriptions
 
-## ✨ Features
+## Tech Stack
 
-- **Responsive Design**: Mobile-first responsive layout using Tailwind CSS
-- **Dynamic Video Loading**: Fetches video data from FreeAPI YouTube endpoint
-- **Video Cards**: Clean, left-oriented card display with video thumbnails and metadata
-- **Thumbnail Display**: High-quality video thumbnails at natural brightness and colors
-- **Video Metadata**: Shows title, channel name, view count, and like count for each video
-- **Dark Mode Toggle**: Official shadcn dark mode with persistent theme preference
-- **Sidebar Navigation**: Includes app header with dark mode toggle and sidebar for better UX
-- **Error Handling**: Proper error handling and request cancellation
-- **Request Cancellation**: Abort controller implementation for clean request lifecycle
+- **React** 19.2.5 - UI framework
+- **Vite** 8.0.10 - Build tool
+- **Tailwind CSS** 4.2.4 - Styling
+- **Shadcn/ui** - Component library
+- **Lucide React** - Icon library
+- **ESLint** - Code linting
 
-## 🛠️ Technologies Used
+## Prerequisites
 
-- **Frontend Framework**: React 18+
-- **Styling**: Tailwind CSS
-- **Build Tool**: Vite
-- **HTTP Client**: Fetch API
-- **Component Library**: Shadcn/ui (Card, Button, Sidebar, etc.)
-- **Icons**: Lucide React icons
-- **UI Components**: Custom and pre-built components
-
-## 📦 Installation
-
-### Prerequisites
 - Node.js (v14 or higher)
-- npm or yarn package manager
+- npm or yarn
 
-### Setup Steps
+## Installation
 
-1. **Clone or navigate to the project directory**
+1. Clone or navigate to the project directory:
    ```bash
-   cd yt-video-API
+   cd product-listing
    ```
 
-2. **Install dependencies**
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-3. **Start the development server**
-   ```bash
-   npm run dev
-   ```
+## Scripts
 
-4. **Build for production**
-   ```bash
-   npm run build
-   ```
+- **Development Server**
+  ```bash
+  npm run dev
+  ```
+  Starts the dev server at `http://localhost:5173`
 
-## 🚀 Usage
+- **Build for Production**
+  ```bash
+  npm run build
+  ```
 
-Once the development server is running, the application will:
+- **Preview Production Build**
+  ```bash
+  npm run preview
+  ```
 
-1. Automatically fetch video data from the FreeAPI endpoint
-2. Parse the response and extract video information
-3. Display videos in a responsive grid layout
-4. Show video thumbnails with proper aspect ratio
-5. Display video titles, view counts, and like counts
+- **Lint Code**
+  ```bash
+  npm run lint
+  ```
 
-### API Endpoint
-
-**Base URL**: `https://api.freeapi.app/api/v1/public/youtube/videos`
-
-**Method**: GET
-
-**Response Structure**:
-```json
-{
-  "statusCode": 200,
-  "data": {
-    "page": 1,
-    "limit": 10,
-    "totalPages": 16,
-    "totalItems": 157,
-    "data": [
-      {
-        "items": {
-          "id": "video-id",
-          "snippet": {
-            "title": "Video Title",
-            "thumbnails": {
-              "standard": {
-                "url": "thumbnail-url"
-              }
-            }
-          },
-          "statistics": {
-            "viewCount": "1000",
-            "likeCount": "50"
-          }
-        }
-      }
-    ]
-  }
-}
-```
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
-├── App.jsx                      # Main app component with API logic
-├── AppBody.jsx                  # Video list container
-├── AppHeader.jsx                # Header component
-├── Sidebar.jsx                  # Sidebar navigation
-├── main.jsx                     # Application entry point
-├── index.css                    # Global styles
+├── App.jsx                    # Main app component
+├── AppBody.jsx                # Product list container
+├── AppHeader.jsx              # Header component
+├── Sidebar.jsx                # Sidebar navigation
+├── main.jsx                   # Entry point
+├── index.css                  # Global styles
 ├── components/
-│   ├── content-card.jsx         # Individual video card component
+│   ├── app-sidebar.jsx        # Sidebar implementation
+│   ├── content-card.jsx       # Product card component
 │   ├── custom/
-│   │   └── app-header.jsx       # Custom header component
-│   └── ui/                      # Shadcn/ui components
+│   │   └── app-header.jsx     # Custom header
+│   └── ui/                    # Shadcn/ui components
 │       ├── badge.jsx
 │       ├── button.jsx
 │       ├── card.jsx
@@ -129,24 +86,34 @@ src/
 │       ├── skeleton.jsx
 │       └── tooltip.jsx
 ├── hooks/
-│   └── use-mobile.js            # Mobile detection hook
-├── lib/
-│   └── utils.js                 # Utility functions
-├── assets/                      # Static assets
-└── public/                      # Public files
+│   └── use-mobile.js          # Mobile detection hook
+└── lib/
+    └── utils.js               # Utility functions
 ```
 
-## 🔍 Key Components
+## API Integration
 
-### **App.jsx**
-- Fetches video data from FreeAPI with nested data structure handling
-- Manages card object list state including channel title extraction
-- Implements proper error handling with HTTP status checking and request cancellation
-- Passes data to AppBody component
+The application fetches product data from:
+```
+https://api.freeapi.app/api/v1/public/randomproducts
+```
 
-### **AppBody.jsx**
-- Maps through video data array
-- Renders individual ContentCard components
+Each product includes:
+- ID, title, description
+- Price and discount percentage
+- Stock availability
+- Thumbnail image
+
+## How It Works
+
+1. **App.jsx** - Fetches products from the FreeAPI endpoint on component mount
+2. **AppBody.jsx** - Maps product data and renders individual product cards
+3. **content-card.jsx** - Displays each product with image, title, price, and details
+4. **Sidebar.jsx** - Provides navigation structure using shadcn/ui sidebar components
+
+## License
+
+Part of Web Dev Cohort 26
 - Applies responsive grid layout
 
 ### **content-card.jsx**
