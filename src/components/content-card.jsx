@@ -1,12 +1,6 @@
 import { Card, CardHeader, CardTitle, CardAction } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-// id: 1,
-//             title: "iPhone 9",
-//             description: "An apple mobile which is nothing like apple",
-//             price: 549,
-//             discountPercentage: 12.96,
-//             stock: 94,
-//             thumbnail:
+import { Badge } from "@/components/ui/badge";
 
 const CardImage = ({
   title,
@@ -27,11 +21,10 @@ const CardImage = ({
         <CardTitle className="text-lg line-clamp-2">{title}</CardTitle>
         <div className="space-y-1">
           <p className="text-sm font-semibold text-foreground flex gap-2 items-center">
-            Price:{" "}
-            <span className="line-through text-xs text-muted-foreground">
-              {discountPercentage}
-            </span>
-            <strong>{price}</strong>
+            Price: <strong>{price}</strong>
+            <Badge className="bg-accent text-foreground">
+              {discountPercentage}% off
+            </Badge>
           </p>
           <p className="text-xs text-muted-foreground">{description}</p>
         </div>
